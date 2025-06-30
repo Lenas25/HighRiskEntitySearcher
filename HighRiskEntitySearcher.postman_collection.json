@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "4226b7f5-8456-40c0-b9e5-d5e687f1b8fd",
+		"name": "High Risk Entity Searcher API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27253791"
+	},
+	"item": [
+		{
+			"name": "GET Search of Pacific entity",
+			"protocolProfileBehavior": {
+				"protocolVersion": "auto"
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search?entityName=Pacific",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "entityName",
+							"value": "Pacific"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Bad Request (empty name)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search?entityName=",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "entityName",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Search for Non-Existent entity",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search?entityName=NonExistentCompanyorEntity",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "entityName",
+							"value": "NonExistentCompanyorEntity"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Search of Coesa entity",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/search?entityName=coesa",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "entityName",
+							"value": "coesa"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

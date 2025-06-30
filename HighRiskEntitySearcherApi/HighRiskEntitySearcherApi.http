@@ -1,0 +1,6 @@
+@HighRiskEntitySearcherApi_HostAddress = http://localhost:5063
+
+GET {{HighRiskEntitySearcherApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

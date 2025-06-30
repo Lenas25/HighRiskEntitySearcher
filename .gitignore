@@ -1,0 +1,63 @@
+
+# Archivos de configuración de sistema operativo
+*.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos de log
+*.log
+*.log.*
+
+# #################### #
+# .NET / VISUAL STUDIO #
+# #################### #
+
+# Directorios de compilación (los más importantes a ignorar)
+[Bb]in/
+[Oo]bj/
+
+# Archivos de configuración de usuario específicos de Visual Studio
+# Contienen la configuración local de tu entorno (ventanas abiertas, etc.)
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# El directorio oculto .vs de Visual Studio
+# Almacena caché, IntelliSense, etc. Es pesado y específico de tu máquina.
+.vs/
+
+# Paquetes NuGet (estilo antiguo) y caché local
+*.nupkg
+*.nuget.props
+*.nuget.targets
+packages/
+
+# Archivos de resultados de pruebas
+TestResults/
+*.trx
+
+# Archivos de publicación (cuando publicas tu aplicación)
+publish/
+**/publish/
+
+# Archivos de configuración de desarrollo local
+# Nunca subas a GitHub tus claves de API, contraseñas o connection strings.
+appsettings.Development.json
+
+# User Secrets de .NET (el archivo secrets.json está fuera del proyecto por defecto,
+# pero es una buena práctica añadirlo por si acaso).
+secrets.json
+
+# Archivos de variables de entorno
+.env
+
+# Los navegadores descargados por Playwright son muy pesados.
+# Cada desarrollador debe instalarlos localmente con 'playwright install'.
+# La ubicación puede variar, pero esta es la común en Windows.
+/bin/Debug/**/playwright.ps1
+/bin/Release/**/playwright.ps1
+*ms-playwright*/
+
+# Visual Studio Code
+.vscode/
