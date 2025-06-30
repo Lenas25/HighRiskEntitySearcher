@@ -30,8 +30,8 @@ Esta es una API REST desarrollada en .NET 9 como solución a una prueba técnica
 
 1.  **Clonar el Repositorio**
     ```bash
-    git clone <URL_DEL_REPOSITORIO> 
-    cd <NOMBRE_DEL_PROYECTO>
+    git clone https://github.com/Lenas25/HighRiskEntitySearcher.git  
+    cd HighRiskEntitySearcher
     ```
 
 2.  **Restaurar Dependencias de .NET**
