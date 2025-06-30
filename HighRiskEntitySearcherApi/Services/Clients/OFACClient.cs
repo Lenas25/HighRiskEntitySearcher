@@ -8,6 +8,7 @@ public class OFACClient : IOFACClient
 {
     private const string SearchUrl = "https://sanctionssearch.ofac.treas.gov/";
 
+
     public async Task<List<Hit>> SearchAsync(string entityName)
     {
         var results = new List<Hit>();

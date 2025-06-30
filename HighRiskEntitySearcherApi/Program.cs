@@ -25,7 +25,24 @@ if (args.FirstOrDefault() == "install-playwright")
 
 var builder = WebApplication.CreateBuilder(args);
 
+var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>();
 
+if (allowedOrigins == null || allowedOrigins.Length == 0)
+{
+    throw new InvalidOperationException("La configuración para CORS (CorsSettings:AllowedOrigins) no está definida o está vacía en appsettings.json");
+}
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        policy =>
+        {
+            // Es necesario reemplazar la ruta de cors policy con el puerto del frontend
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 // Servicios estándar de una API de .NET
 builder.Services.AddControllers(); // Habilita el uso de controladores
@@ -57,6 +74,8 @@ if (app.Environment.IsDevelopment())
 
 // Redirige automáticamente las peticiones HTTP a HTTPS para mayor seguridad.
 app.UseHttpsRedirection();
+
+app.UseCors("AllowSpecificOrigin");
 
 app.MapControllers();
 

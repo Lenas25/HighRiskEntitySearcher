@@ -30,7 +30,7 @@ Esta es una API REST desarrollada en .NET 9 como solución a una prueba técnica
 
 1.  **Clonar el Repositorio**
     ```bash
-    git clone <URL_DEL_REPOSITORIO>
+    git clone <URL_DEL_REPOSITORIO> 
     cd <NOMBRE_DEL_PROYECTO>
     ```
 
@@ -46,14 +46,27 @@ Esta es una API REST desarrollada en .NET 9 como solución a una prueba técnica
     dotnet run --project HighRiskEntitySearcherApi install-playwright
     ```
 
-4.  **Ejecutar la API**
+4.  **Habilitar los CORS**
+    Si la API se usará desde otra aplicación (como un frontend en un dominio diferente), es crucial habilitar los CORS (Cross-Origin Resource Sharing).Para configurarlo, simplemente modifica la sección "CorsSettings" en tu archivo de configuración (normalmente appsettings.json). En la lista "AllowedOrigins", agrega las URLs de los dominios desde los cuales se conectarán a tu API.
+    ```json
+    {
+        ...,
+        "CorsSettings": {
+            "AllowedOrigins": [
+                "http://localhost:XXXX",
+            ]
+        }
+    }
+    ```
+
+5.  **Ejecutar la API**
     Una vez que las dependencias están listas, lanza el servidor de la API.
     ```bash
     dotnet run --project HighRiskEntitySearcherApi
     ```
     La terminal mostrará las URLs en las que está escuchando la API, usualmente `https://localhost:XXXX`.
 
-5.  **Ejecutar las Pruebas (Opcional)**
+6.  **Ejecutar las Pruebas (Opcional)**
     Para verificar que todo funciona correctamente, puedes ejecutar el conjunto de pruebas de integración desde la carpeta raíz.
     ```bash
     dotnet test
