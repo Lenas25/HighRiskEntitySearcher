@@ -10,6 +10,7 @@ Esta es una API REST desarrollada en .NET 9 como solución a una prueba técnica
 -   **Manejo de APIs Internas:** Demuestra la capacidad de interceptar y consumir APIs JSON internas de un sitio web para una extracción de datos más fiable que el scraping de HTML.
 -   **Pruebas de Integración:** Incluye un proyecto de pruebas (`xUnit`) con tests de integración que validan el comportamiento completo de la API.
 -   **Manejo de Fallos:** Implementa una estrategia de fallback con datos simulados para fuentes que están protegidas contra el scraping.
+-   **Limitación de Tasa (Rate Limiting):** Protege la API de abusos con un límite de 20 solicitudes por minuto en el endpoint de búsqueda.
 
 ## Fuentes de Datos Implementadas
 
