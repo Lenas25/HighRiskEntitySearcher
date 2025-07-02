@@ -1,7 +1,9 @@
 // --- Dependencias necesarias para configurar la aplicación ---
+using System.Threading.RateLimiting;
 using HighRiskEntitySearcherApi.Models; // Para acceder a los modelos
 using HighRiskEntitySearcherApi.Services; // Para acceder a ISearchService y SearchService
-using HighRiskEntitySearcherApi.Services.Clients; // Para acceder a las interfaces y clases de los clientes
+using HighRiskEntitySearcherApi.Services.Clients;
+using Microsoft.AspNetCore.RateLimiting; // Para acceder a las interfaces y clases de los clientes
 
 // solo se ejecutará el código de instalación y la aplicación se cerrará.
 if (args.FirstOrDefault() == "install-playwright")
@@ -24,6 +26,25 @@ if (args.FirstOrDefault() == "install-playwright")
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRateLimiter(options =>
+{
+    // Define tu política
+    options.AddFixedWindowLimiter(policyName: "SearchApiMinuteLimit", opt =>
+    {
+        opt.PermitLimit = 20; // Permite 20 solicitudes
+        opt.Window = TimeSpan.FromMinutes(1); // Cada 1 minuto
+        opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst; // Las solicitudes en cola se procesan en orden de llegada
+        opt.QueueLimit = 0; // No encolar solicitudes; rechazarlas directamente si se excede el límite
+    });
+
+    // Manejo de la respuesta cuando se excede el límite
+    options.OnRejected = async (context, cancellationToken) =>
+    {
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+        await context.HttpContext.Response.WriteAsync("Demasiadas solicitudes. Por favor, espera un momento.", cancellationToken);
+    };
+});
 
 var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>();
 
@@ -59,6 +80,7 @@ builder.Services.AddScoped<IWorldBankClient, WorldBankClient>();
 builder.Services.AddScoped<IOFACClient, OFACClient>();
 
 
+
 // Una vez que todos los servicios están registrados, construimos la aplicación.
 var app = builder.Build();
 
@@ -74,6 +96,9 @@ if (app.Environment.IsDevelopment())
 
 // Redirige automáticamente las peticiones HTTP a HTTPS para mayor seguridad.
 app.UseHttpsRedirection();
+
+//  Habilitar el middleware de Rate Limiting en el pipeline de solicitudes
+app.UseRateLimiter();
 
 app.UseCors("AllowSpecificOrigin");
 

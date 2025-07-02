@@ -2,6 +2,7 @@
 using HighRiskEntitySearcherApi.Models;
 using HighRiskEntitySearcherApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace HighRiskEntitySearcherApi.Controllers;
 
@@ -18,7 +19,9 @@ public class SearchController : ControllerBase
         _logger = logger;
     }
 
+    // Aplica la política definida
     [HttpGet]
+    [EnableRateLimiting("SearchApiMinuteLimit")]
     public async Task<ActionResult<SearchResponse>> Search([FromQuery] string entityName)
     {
         if (string.IsNullOrWhiteSpace(entityName))
