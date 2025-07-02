@@ -50,7 +50,7 @@ Esta es una API REST desarrollada en .NET 9 como solución a una prueba técnica
     Si la API se usará desde otra aplicación (como un frontend en un dominio diferente), es crucial habilitar los CORS (Cross-Origin Resource Sharing).Para configurarlo, simplemente modifica la sección "CorsSettings" en tu archivo de configuración (normalmente appsettings.json). En la lista "AllowedOrigins", agrega las URLs de los dominios desde los cuales se conectarán a tu API.
     ```json
     {
-        ...,
+        ...
         "CorsSettings": {
             "AllowedOrigins": [
                 "http://localhost:XXXX",
